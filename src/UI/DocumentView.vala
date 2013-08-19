@@ -62,7 +62,7 @@ namespace Write
 			
 			load_string(Window.GetResourceAsString("/org/elementary/write/template.html"), "text/html", "UTF8", "");
 			load_finished.connect(on_load);
-			user_changed_contents.connect(handle_changed_contents);
+			selection_changed.connect(handle_selection_changed);
 		}
 		
 		/**
@@ -101,7 +101,7 @@ namespace Write
 			}
 		}
 		
-		private void handle_changed_contents()
+		private void handle_selection_changed()
 		{
 			var Context = Window.ContextBar;
 		
