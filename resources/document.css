@@ -1,0 +1,83 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+b { font-weight: bold; }
+i { font-style: italic; }
+
+body
+{
+	background-color: #F8F8F8;
+	background-attachment: fixed;
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.04, rgb(240,240,240)),
+		color-stop(0.32, rgb(248,248,248))
+	);
+}
+
+#container .page
+{
+	width: 8.50in;
+	height: 11in;
+	margin: 30px auto;
+	background-color: white;
+	border: 1px solid #C6C6C6;
+	box-shadow: 0px 6px 4px 3px #DDD;
+	position: relative; 
+}
+
+#container .page .padding 
+{
+	outline: none;
+	border: 1px solid light;
+	position: absolute;
+	top: 0.75in;
+	left: 0.75in;
+	right: 0.75in;
+	bottom: 0.75in;
+}
+#container .page:hover { cursor: text; }
+#zoom_control { position: fixed; bottom: 10px; right: 10px; width: 120px; }

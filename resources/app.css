@@ -1,0 +1,48 @@
+.context-toolbar 
+{
+	padding: 12px 8px;
+	background-color: rgb(248, 248, 248); 
+	background-image: -gtk-gradient(linear, 0 0.7, 0 1, from(rgb(248, 248, 248)), to(rgb(240, 240, 240)));
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	-GtkWidget-window-dragging: false;
+}
+
+.context-toolbar WriteMultiModeButton GtkToggleButton
+{
+	padding: 4px 12px;
+}
+
+.context-toolbar WriteMultiModeButton GtkToggleButton:hover
+{
+	padding: 4px 12px;
+}
+
+.context-toolbar GraniteWidgetsModeButton GtkToggleButton
+{
+	padding: 4px 6px;
+}
+
+.context-toolbar GraniteWidgetsModeButton GtkToggleButton:hover
+{
+	padding: 4px 6px;
+}
+
+.context-toolbar GraniteWidgetsModeButton GtkButton GtkWidget:hover
+{
+	border: 0px;
+}
+
+.context-toolbar GraniteWidgetsModeButton GtkButton GtkButton
+{
+	padding: 0px;
+	margin: 0px;
+	border: 0px none;
+}
+
+.context-toolbar GraniteWidgetsModeButton GtkButton GtkImage:hover
+{
+	padding: 0px;
+	margin: 0px;
+	border: 0px none;
+}
