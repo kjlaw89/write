@@ -1,4 +1,4 @@
-Write
+Wmidorrite
 =====
 
 elementaryOS Writing application

@@ -81,3 +81,15 @@ body
 }
 #container .page:hover { cursor: text; }
 #zoom_control { position: fixed; bottom: 10px; right: 10px; width: 120px; }
+
+/** Default document styles **/
+body, p { font: 12pt "Droid Sans", Arial, sans-serif; }
+h1 { font: 44pt "Raleway", Arial, sans-serif; font-weight: 100; }
+h2 { font: 20pt "Raleway", Arial, sans-serif; font-weight: 500; color: darkgray; }
+h3 { font: 20pt bold "Open Sans", Arial, sans-serif; }
+h4 { font: 16pt "Open Sans", Arial, sans-serif; font-weight: 300; }
+h5 { font: 12pt "Open Sans", Arial, sans-serif; font-weight: 500; color: darkgray; }
+h6 { font: 12pt "Droid Sans", Arial, sans-serif; font-weight: bold; }
+
+table { border: 1px solid; width: 100%; }
+table tr td { border: 1px solid; padding: 4px; }

@@ -94,6 +94,11 @@ namespace Write
 			
 				ZoomControl = Document.get_element_by_id("zoom_control") as DOM.HTMLInputElement;
 				//ZoomControl.add_event_listener("change", (GLib.Callback)zoom, true, null);
+				
+				// Tell the document to go to do all edits with styles
+				Document.exec_command("styleWithCSS", false, "true");
+				Document.exec_command("enableInlineTableEditing", false, "true");
+				Document.exec_command("enableObjectResizing", false, "true");
 			}
 			catch (Error error)
 			{
@@ -110,7 +115,7 @@ namespace Write
 			bool underline = Document.query_command_state("Underline");
 			bool strike = Document.query_command_state("Strikethrough");
 			bool super = Document.query_command_state("Superscript");
-			Context.SelectFormats(bold, italic, underline, strike, super);
+			Context.SelectStyles(bold, italic, underline, strike, super);
 			
 			bool justifyLeft = Document.query_command_state("justifyLeft");
 			bool justifyCenter = Document.query_command_state("justifyCenter");
@@ -125,6 +130,9 @@ namespace Write
 				Context.SelectAlignment(2);
 			else if (justify)
 				Context.SelectAlignment(3);
+				
+			string format = Document.query_command_value("FormatBlock");
+			Context.SelectFormat(format);
 		}
 		
 		/*private void zoom()

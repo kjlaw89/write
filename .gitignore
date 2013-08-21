@@ -70,3 +70,8 @@
 /write
 /appresources
 /README.md~
+/resources/app.css~
+/resources/document.css~
+/src/Widgets/ComboMenu.vala~
+/build/src/CMakeFiles/write.dir/Widgets/ComboMenu.c.o
+/build/src/Widgets/ComboMenu.c

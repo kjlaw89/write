@@ -42,8 +42,12 @@ namespace Write
 	public class ContextToolbar : Toolbar
 	{
 		Write.Window Window { get; private set; }
-		MultiModeButton FormatButtons { get; private set; }
+		MultiModeButton StyleButtons { get; private set; }
 		Granite.Widgets.ModeButton JustifyButtons { get; private set; }
+		Gtk.ComboBoxText FormatCombo { get; private set; }
+		ComboMenu InsertCombo { get; private set; }
+		
+		private bool manualFormatChange = false;
 	
  		/**
  		 * Initializes the main window toolbar for the application
@@ -53,15 +57,14 @@ namespace Write
 			base("context-toolbar");
 			Window = window;
 			
+			setup_formatting_combo();
 			setup_styles();
 			setup_alignments();
+			setup_insert_combo();
 		}
 		
 		private void setup_styles()
-		{
-			FormatButtons = new MultiModeButton();
-			FormatButtons.mode_changed.connect(handle_format_change);
-			
+		{			
 			var boldLabel = new Gtk.Label("<b>B</b>");
 			boldLabel.use_markup = true;
 			boldLabel.name = "bold";
@@ -88,13 +91,15 @@ namespace Write
 			superLabel.tooltip_text = "Superscript Selection";
 			
 			// Add all the labels to the styles multimode
-			FormatButtons.append(boldLabel);
-			FormatButtons.append(italicLabel);
-			FormatButtons.append(underlineLabel);
-			FormatButtons.append(strikethroughLabel);
-			FormatButtons.append(superLabel);
+			StyleButtons = new MultiModeButton();
+			StyleButtons.append(boldLabel);
+			StyleButtons.append(italicLabel);
+			StyleButtons.append(underlineLabel);
+			StyleButtons.append(strikethroughLabel);
+			StyleButtons.append(superLabel);
+			StyleButtons.mode_changed.connect(handle_style_change);
 			
-			add_left(FormatButtons);
+			add_left(StyleButtons);
 		}
 		
 		private void setup_alignments()
@@ -134,10 +139,9 @@ namespace Write
 				JustifyButtons.append(justifyCenterButton);
 				JustifyButtons.append(justifyRightButton);
 				JustifyButtons.append(justifyButton);
-			
+				JustifyButtons.mode_changed.connect(handle_alignment_change);
 			
 				add_left(JustifyButtons);
-				JustifyButtons.mode_changed.connect(handle_alignment_change);
 			}
 			catch (Error error)
 			{
@@ -145,7 +149,72 @@ namespace Write
 			}	
 		}
 		
-		private void handle_format_change(Gtk.Widget widget)
+		private void setup_insert_combo()
+		{
+			InsertCombo = new ComboMenu("Insert         ");  // ToDO: Use real CSS to pad this
+			InsertCombo.append_text("Image");
+			InsertCombo.append_text("Table");
+			InsertCombo.item_selected.connect(handle_insert_change);
+			
+			add_right(InsertCombo);
+		}
+		
+		private void setup_formatting_combo()
+		{
+			FormatCombo = new Gtk.ComboBoxText();
+			FormatCombo.append_text("Normal Text");
+			FormatCombo.append_text("Title");
+			FormatCombo.append_text("Subtitle");
+			FormatCombo.append_text("Header 1");
+			FormatCombo.append_text("Header 2");
+			FormatCombo.append_text("Header 3");
+			FormatCombo.append_text("Pre-Format");
+			FormatCombo.append_text("Quote");
+			FormatCombo.active = 0;
+			FormatCombo.changed.connect(handle_format_change);
+			
+			add_left(FormatCombo);
+		}
+		
+		private void handle_format_change()
+		{
+			if (manualFormatChange)
+			{
+				manualFormatChange = false;
+				return;
+			}
+		
+			var Document = Window.View.Document;
+			switch (FormatCombo.active)
+			{
+				case 0:
+					Document.exec_command("formatBlock", false, "p");
+					break;
+				case 1:
+					Document.exec_command("formatBlock", false, "H1");
+					break;
+				case 2:
+					Document.exec_command("formatBlock", false, "h2");
+					break;
+				case 3:
+					Document.exec_command("formatBlock", false, "h3");
+					break;
+				case 4:
+					Document.exec_command("formatBlock", false, "h4");
+					break;
+				case 5:
+					Document.exec_command("formatBlock", false, "h5");
+					break;
+				case 6:
+					Document.exec_command("formatBlock", false, "blockquote");
+					break;
+				case 7:
+					Document.exec_command("formatBlock", false, "pre");
+					break;
+			}
+		}
+		
+		private void handle_style_change(Gtk.Widget widget)
 		{
 			var Document = Window.View.Document;
 			Document.exec_command(widget.name, false, "null");
@@ -157,13 +226,67 @@ namespace Write
 			Document.exec_command(widget.name, false, "null");
 		}
 		
-		public void SelectFormats(bool bold = false, bool italic = false, bool underline = false, bool strike = false, bool super = false)
+		private void handle_insert_change(int index)
 		{
-			FormatButtons.set_active(0, bold, false);
-			FormatButtons.set_active(1, italic, false);
-			FormatButtons.set_active(2, underline, false);
-			FormatButtons.set_active(3, strike, false);
-			FormatButtons.set_active(4, super, false);
+			var Document = Window.View.Document;
+			switch (index)
+			{
+				case 1:
+					Document.exec_command("insertHTML", false, """<table><tr><td></td><td></td></tr><tr><td></td><td></td></tr></table>""");
+					break;
+				default:
+					break;
+			}
+		}
+		
+		public void SelectFormat(string format)
+		{
+			int newActive = 0;
+			switch (format)
+			{
+				case "p":
+					newActive = 0;
+					break;
+				case "h1":
+					newActive = 1;
+					break;
+				case "h2":
+					newActive = 2;
+					break;
+				case "h3":
+					newActive = 3;
+					break;
+				case "h4":
+					newActive = 4;
+					break;
+				case "h5":
+					newActive = 5;
+					break;
+				case "blockquote":
+					newActive = 6;
+					break;
+				case "pre":
+					newActive = 7;
+					break;
+				default:
+					newActive = 0;
+					break;
+			}
+			
+			if (newActive != FormatCombo.active)
+			{
+				manualFormatChange = true;
+				FormatCombo.active = newActive;
+			}
+		}
+		
+		public void SelectStyles(bool bold = false, bool italic = false, bool underline = false, bool strike = false, bool super = false)
+		{
+			StyleButtons.set_active(0, bold, false);
+			StyleButtons.set_active(1, italic, false);
+			StyleButtons.set_active(2, underline, false);
+			StyleButtons.set_active(3, strike, false);
+			StyleButtons.set_active(4, super, false);
 		}
 		
 		public void SelectAlignment(int alignment)

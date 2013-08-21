@@ -39,6 +39,7 @@ vala_precompile(VALA_C
     
     Widgets/Toolbar.vala
     Widgets/MultiModeButton.vala
+    Widgets/ComboMenu.vala
     
     UI/DocumentToolbar.vala
     UI/DocumentView.vala
