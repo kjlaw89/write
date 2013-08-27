@@ -37,6 +37,9 @@ vala_precompile(VALA_C
     main.vala
     Window.vala
     
+    Core/PageFormat.vala
+    Core/TextStyle.vala
+    
     Widgets/Toolbar.vala
     Widgets/MultiModeButton.vala
     Widgets/ComboMenu.vala

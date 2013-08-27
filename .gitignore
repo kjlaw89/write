@@ -75,3 +75,8 @@
 /src/Widgets/ComboMenu.vala~
 /build/src/CMakeFiles/write.dir/Widgets/ComboMenu.c.o
 /build/src/Widgets/ComboMenu.c
+/build/src/CMakeFiles/write.dir/Core/PageFormat.c.o
+/build/src/CMakeFiles/write.dir/Core/TextStyle.c.o
+/build/src/Core/PageFormat.c
+/build/src/Core/TextStyle.c
+/resources/text-styles/elementary.css~

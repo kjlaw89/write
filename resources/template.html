@@ -1,20 +1,29 @@
 <html>
 	<head>
 		<title>Testing HTML</title>
+		<meta charset="UTF-8" />
+		<style type="text/css" id="PageFormat"></style>
+		<style type="text/css" id="DocumentStyle"></style>
 	</head>
-	<body>
-		<section id="container">
-			<div class="page">
-				<div class="padding" contenteditable='true'>
-				
-				</div>
-			</div>
+	<body>	
+		<div id="container">
+			<section class="page" rel="1">
+				<header contenteditable="true"></header>
+				<div class="body" contenteditable="true"><p></p></div>
+				<footer contenteditable="true"></footer>
+			</section>
 			
-			<div class="page">
-				<div class="padding" contenteditable='true'>
-					<p></p>
-				</div>
-			</div>
+			<section id="page_template" class="page" rel="2">
+				<header contenteditable="true"></header>
+				<div class="body"></div>
+				<footer contenteditable="true"></footer>
+			</section>
+		</div>
+
+		<section id="page_template" class="page" rel="-1">
+			<header contenteditable="true"></header>
+			<div class="body"></div>
+			<footer contenteditable="true"></footer>
 		</section>
 
 		<div id="top_ruler" style="display: none;"></div>

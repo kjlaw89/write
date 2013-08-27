@@ -60,9 +60,16 @@ namespace Write
 			settings.enable_private_browsing = true;
 			settings.enable_java_applet = false;
 			
-			load_string(Window.GetResourceAsString("/org/elementary/write/template.html"), "text/html", "UTF8", "");
+			load_string(Write.Window.GetResourceAsString("/write/template.html"), "text/html", "UTF8", "");
 			load_finished.connect(on_load);
 			selection_changed.connect(handle_selection_changed);
+			web_inspector.inspect_web_view.connect(getInspectorView);
+			
+			// Load in default page formats
+			new PageFormat.load_from_resource("/write/page-formats/letter.css");
+			
+			// Load in default text styles
+			new TextStyle.load_from_resource("/write/text-styles/elementary.css");
 		}
 		
 		/**
@@ -74,20 +81,20 @@ namespace Write
 			{
 				// Load in our styles
 				var styleElement = Document.create_element("style");
-				var styleText = Document.create_text_node(Window.GetResourceAsString("/org/elementary/write/document.css"));
+				var styleText = Document.create_text_node(Write.Window.GetResourceAsString("/write/document.css"));
 				styleElement.set_attribute("type", "text/css");
 				styleElement.append_child(styleText);
 				Head.append_child(styleElement);
 			
 				// Load in our various scripts
 				var jqueryElement = Document.create_element("script");
-				var jqueryText = Document.create_text_node(Window.GetResourceAsString("/org/elementary/write/jquery.js"));
+				var jqueryText = Document.create_text_node(Write.Window.GetResourceAsString("/write/scripts/jquery.js"));
 				jqueryElement.set_attribute("type", "text/javascript");
 				jqueryElement.append_child(jqueryText);
 				Head.append_child(jqueryElement);
 			
 				var sliderElement = Document.create_element("script");
-				var sliderText = Document.create_text_node(Window.GetResourceAsString("/org/elementary/write/zoom.js"));
+				var sliderText = Document.create_text_node(Write.Window.GetResourceAsString("/write/scripts/zoom.js"));
 				sliderElement.set_attribute("type", "text/javascript");
 				sliderElement.append_child(sliderText);
 				Head.append_child(sliderElement);
@@ -99,6 +106,13 @@ namespace Write
 				Document.exec_command("styleWithCSS", false, "true");
 				Document.exec_command("enableInlineTableEditing", false, "true");
 				Document.exec_command("enableObjectResizing", false, "true");
+				//web_inspector.show();
+				
+				// Set our default page format
+				change_document_format("Letter");
+				
+				// Set our default style
+				change_document_style("elementary");
 			}
 			catch (Error error)
 			{
@@ -155,5 +169,58 @@ namespace Write
 				}
 			}
 		}*/
+		
+		private void change_document_format(string formatName)
+		{
+			if (!PageFormat.Formats.has_key(formatName))
+				return;
+				
+			var format = PageFormat.Formats.get(formatName);
+			var element = Document.get_element_by_id("PageFormat") as DOM.HTMLStyleElement;
+			element.set_inner_html(format.Data);
+		}
+		
+		private void change_document_style(string styleName)
+		{
+			if (!TextStyle.Styles.has_key(styleName))
+				return;
+				
+			var style = TextStyle.Styles.get(styleName);
+			var element = Document.get_element_by_id("DocumentStyle") as DOM.HTMLStyleElement;
+			element.set_inner_html(style.Data);
+			
+			var tags = Document.get_elements_by_tag_name("body");
+			var body = tags.item(0) as DOM.HTMLElement;
+			body.class_name = styleName;
+		}
+		
+		public unowned WebView getInspectorView(WebView v)
+		{
+			Gtk.Window iWindow = new Gtk.Window();
+			WebView iWebview = new WebKit.WebView();
+
+			Gtk.ScrolledWindow sWindow = new Gtk.ScrolledWindow(null, null);
+			sWindow.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC);
+
+			sWindow.add(iWebview);
+			iWindow.add(sWindow);
+			
+			iWindow.title = title + " (Web Inspector)";
+
+			int width, height;
+			Window.get_size(out width, out height);
+			iWindow.set_default_size(width, height);
+
+			iWindow.show_all();
+
+			iWindow.delete_event.connect(() =>
+			{
+				web_inspector.close();
+				return false;
+			});
+
+			unowned WebView r = iWebview;
+			return r;
+		}
 	}
 }

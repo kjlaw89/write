@@ -106,28 +106,28 @@ namespace Write
 		{
 			try 
 			{
-				var justifyLeft = new Pixbuf.from_stream(Window.Resources.open_stream("/org/elementary/write/justify_left.png", GLib.ResourceLookupFlags.NONE));
+				var justifyLeft = new Pixbuf.from_stream(Write.Window.Resources.open_stream("/write/images/justify_left.png", GLib.ResourceLookupFlags.NONE));
 				var justifyLeftImage = new Gtk.Image.from_pixbuf(justifyLeft);
 				var justifyLeftButton = new Gtk.Button();
 				justifyLeftButton.image = justifyLeftImage;
 				justifyLeftButton.name = "justifyLeft";
 				justifyLeftButton.tooltip_text = "Left Align";
 			
-				var justifyCenter = new Pixbuf.from_stream(Window.Resources.open_stream("/org/elementary/write/justify_center.png", GLib.ResourceLookupFlags.NONE));
+				var justifyCenter = new Pixbuf.from_stream(Write.Window.Resources.open_stream("/write/images/justify_center.png", GLib.ResourceLookupFlags.NONE));
 				var justifyCenterImage = new Gtk.Image.from_pixbuf(justifyCenter);
 				var justifyCenterButton = new Gtk.Button();
 				justifyCenterButton.image = justifyCenterImage;
 				justifyCenterButton.name = "justifyCenter";
 				justifyCenterButton.tooltip_text = "Center Align";
 			
-				var justifyRight = new Pixbuf.from_stream(Window.Resources.open_stream("/org/elementary/write/justify_right.png", GLib.ResourceLookupFlags.NONE));
+				var justifyRight = new Pixbuf.from_stream(Write.Window.Resources.open_stream("/write/images/justify_right.png", GLib.ResourceLookupFlags.NONE));
 				var justifyRightImage = new Gtk.Image.from_pixbuf(justifyRight);
 				var justifyRightButton = new Gtk.Button();
 				justifyRightButton.image = justifyRightImage;
 				justifyRightButton.name = "justifyRight";
 				justifyRightButton.tooltip_text = "Right Align";
 			
-				var justify = new Pixbuf.from_stream(Window.Resources.open_stream("/org/elementary/write/justify.png", GLib.ResourceLookupFlags.NONE));
+				var justify = new Pixbuf.from_stream(Write.Window.Resources.open_stream("/write/images/justify.png", GLib.ResourceLookupFlags.NONE));
 				var justifyImage = new Gtk.Image.from_pixbuf(justify);
 				var justifyButton = new Gtk.Button();
 				justifyButton.image = justifyImage;

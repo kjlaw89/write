@@ -1,0 +1,36 @@
+/* Format Name: Letter */
+/* Description: Default letter sizing */
+.page 
+{ 
+	width: 8.50in;
+	height: 11in;
+	max-height: 11in;
+	border: 1px solid #C6C6C6;
+	border-collapse: collapse;
+	box-shadow: 0px 6px 4px 3px #DDD;
+}
+
+.page header 
+{ 
+	min-height: 0.75in;
+	margin: 0px 0.75in;
+}
+
+.page header:focus { border-bottom: 1px dashed; }
+
+.page .body
+{
+	height: 9.5in;
+	margin: 0.75in;
+}
+
+.page footer
+{
+	min-height: 0.75in;
+	margin: 0px 0.75in;
+}
+
+.page footer:focus
+{
+	border-top: 1px dashed;
+}

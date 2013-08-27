@@ -64,7 +64,7 @@ namespace Write
 		{
 		
 			string data = "";
-			var stream = new GLib.DataInputStream(Window.Resources.open_stream(resource, GLib.ResourceLookupFlags.NONE));
+			var stream = new GLib.DataInputStream(Write.Window.Resources.open_stream(resource, GLib.ResourceLookupFlags.NONE));
 			
 			string? line = null;
 			while ((line = stream.read_line(null, null)) != null)
@@ -88,7 +88,7 @@ namespace Write
 			try
 			{
 				var css = new Gtk.CssProvider();
-				css.load_from_data(Window.GetResourceAsString("/org/elementary/write/app.css"), -1);
+				css.load_from_data(Write.Window.GetResourceAsString("/write/app.css"), -1);
 				Gtk.StyleContext.add_provider_for_screen(screen, css, Gtk.STYLE_PROVIDER_PRIORITY_THEME);
 			}
 			catch (Error ex) { }

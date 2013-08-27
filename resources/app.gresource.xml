@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/elementary/write">
-    <file>justify_left.png</file>
-    <file>justify_right.png</file>
-    <file>justify_center.png</file>
-    <file>justify.png</file>
-    <file>template.html</file>
-    <file>app.css</file>
+  <gresource prefix="/write/">
+  	<file>template.html</file>
+  	<file>app.css</file>
     <file>document.css</file>
-    <file>jquery.js</file>
-    <file>zoom.js</file>
+    <file>images/justify_left.png</file>
+    <file>images/justify_right.png</file>
+    <file>images/justify_center.png</file>
+    <file>images/justify.png</file>
+    <file>scripts/jquery.js</file>
+    <file>scripts/zoom.js</file>
+    <file>text-styles/elementary.css</file>
+    <file>page-formats/letter.css</file>
   </gresource>
 </gresources>
