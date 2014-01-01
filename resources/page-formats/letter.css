@@ -10,27 +10,8 @@
 	box-shadow: 0px 6px 4px 3px #DDD;
 }
 
-.page header 
-{ 
-	min-height: 0.75in;
-	margin: 0px 0.75in;
-}
-
-.page header:focus { border-bottom: 1px dashed; }
-
-.page .body
-{
-	height: 9.5in;
-	margin: 0.75in;
-}
-
-.page footer
-{
-	min-height: 0.75in;
-	margin: 0px 0.75in;
-}
-
-.page footer:focus
-{
-	border-top: 1px dashed;
-}
+.page .header > div, .page .body > div, .page .footer > div { padding: 0 0.75in; }
+.page .header > div, .page .footer > div { min-height: 0.75in; height: 0.75in; }
+.page .header > div:focus { border-bottom: 1px dashed; }
+.page .footer > div:focus { border-top: 1px dashed; }
+.page .body > div { height: 100%; }

@@ -58,9 +58,10 @@ body
 	);
 }
 
-.page { background-color: white; margin: 20px auto; }
+.page { display: table; background-color: white; margin: 20px auto; }
 .page:hover { cursor: text; }
-.page header, .page .body, .page footer { outline: none; }
+.page .row { display: table-row; }
+.page .header > div, .page .body > div, .page .footer > div { display: table-cell; outline: none; }
 
 
 #zoom_control { position: fixed; bottom: 10px; right: 10px; width: 120px; }

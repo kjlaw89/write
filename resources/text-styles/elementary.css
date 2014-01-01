@@ -1,13 +1,13 @@
 /* Style Name: elementary */
 /* Description: Default format stylesheet for Write application */
-.elementary body { font: 12pt "Droid Sans", Arial, sans-serif; }
-.elementary p { font: 12pt "Droid Sans", Arial, sans-serif; }
-.elementary h1 { font: 44pt "Raleway", Arial, sans-serif; font-weight: 100; }
-.elementary h2 { font: 20pt "Raleway", Arial, sans-serif; font-weight: 500; color: darkgray; }
-.elementary h3 { font: 20pt bold "Open Sans", Arial, sans-serif; }
-.elementary h4 { font: 16pt "Open Sans", Arial, sans-serif; font-weight: 300; }
-.elementary h5 { font: 12pt "Open Sans", Arial, sans-serif; font-weight: 500; color: darkgray; }
-.elementary h6 { font: 12pt "Droid Sans", Arial, sans-serif; font-weight: bold; }
+.elementary body { font-size: 12pt; font-family: "Droid Sans", Arial, sans-serif; }
+.elementary p { font-size: 12pt; font-family: "Droid Sans", Arial, sans-serif; }
+.elementary h1 { font-size: 44pt; font-family: "Raleway", Arial, sans-serif; font-weight: 100; }
+.elementary h2 { font-size: 20pt; font-family: "Raleway", Arial, sans-serif; font-weight: 500; color: darkgray; }
+.elementary h3 { font-size: 20pt; font-family: "Open Sans", Arial, sans-serif; font-weight: bold; }
+.elementary h4 { font-size: 16pt; font-family: "Open Sans", Arial, sans-serif; font-weight: 300; }
+.elementary h5 { font-size: 12pt; font-family: "Open Sans", Arial, sans-serif; font-weight: 500; color: darkgray; }
+.elementary h6 { font-size: 12pt; font-family: "Droid Sans", Arial, sans-serif; font-weight: bold; }
 
 .elementary table { border: 1px solid; width: 100%; }
 .elementary table tr td { border: 1px solid; padding: 4px; }

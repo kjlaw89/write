@@ -61,8 +61,10 @@ namespace Write
 			settings.enable_java_applet = false;
 			
 			load_string(Write.Window.GetResourceAsString("/write/template.html"), "text/html", "UTF8", "");
-			load_finished.connect(on_load);
+			load_finished.connect(handle_load_finished);
+			paste_clipboard.connect(handle_paste_clipboard);
 			selection_changed.connect(handle_selection_changed);
+			should_apply_style.connect(handle_should_apply_style);
 			web_inspector.inspect_web_view.connect(getInspectorView);
 			
 			// Load in default page formats
@@ -75,7 +77,7 @@ namespace Write
 		/**
 		 * Handles the initial load of WebKit
 		 */
-		private void on_load(WebFrame frame)
+		private void handle_load_finished(WebFrame frame)
 		{
 			try
 			{
@@ -106,7 +108,7 @@ namespace Write
 				Document.exec_command("styleWithCSS", false, "true");
 				Document.exec_command("enableInlineTableEditing", false, "true");
 				Document.exec_command("enableObjectResizing", false, "true");
-				//web_inspector.show();
+				web_inspector.show();
 				
 				// Set our default page format
 				change_document_format("Letter");
@@ -147,6 +149,16 @@ namespace Write
 				
 			string format = Document.query_command_value("FormatBlock");
 			Context.SelectFormat(format);
+		}
+		
+		private void handle_paste_clipboard(){
+			stdout.printf("no inherit!\n");
+			Body.set_inner_html(Body.get_inner_html().replace("font: inherit;", ""));
+		}
+		
+		private bool handle_should_apply_style(DOM.CSSStyleDeclaration style, DOM.Range range){
+			stdout.printf("apply style?\n");
+			return true;
 		}
 		
 		/*private void zoom()
